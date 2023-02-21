@@ -2,7 +2,7 @@
 {
     public interface INetworkConnector
     {
-        public void Connect();
+        public void Connect(string ip, int port);
         public void Disconnect();
         public void CheckConnectionStatus();
     }

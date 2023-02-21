@@ -2,6 +2,7 @@
 {
     public interface ICameraCodeDecoder
     {
-        public string Decode();
+        public string[] Decode(string undecodedCodes);
+        public bool isCodesCorrected(string[] codes);
     }
 }

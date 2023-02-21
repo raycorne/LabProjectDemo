@@ -4,7 +4,7 @@ namespace LabProjectDemo.Core.Services.Printer
 {
     public class PrinterTCPConnector : IPrinterNetworkModule
     {
-        public void Connect()
+        public void Connect(string ip, int port)
         {
             throw new NotImplementedException();
         }

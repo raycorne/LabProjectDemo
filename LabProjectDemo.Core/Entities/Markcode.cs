@@ -2,12 +2,12 @@
 {
     public class Markcode
     {
-        private Guid _id;
-        private string _code;
-        public Markcode(Guid id, string code)
+        public string Id;
+        public string Code;
+        public Markcode(string id, string code)
         {
-            _id = id;
-            _code = code;
+            Id = id;
+            Code = code;
         }
     }
 }

@@ -17,7 +17,7 @@ namespace LabProjectDemo.Core.Services
             _markcodeRepository.AddMarkcode(markcode);
         }
 
-        public void DeleteMarkcodeById(Guid id)
+        public void DeleteMarkcodeById(string id)
         {
             _markcodeRepository.DeleteMarkcodeById(id);
         }
@@ -27,7 +27,7 @@ namespace LabProjectDemo.Core.Services
             return _markcodeRepository.GetAllMarkcodes();
         }
 
-        public Markcode GetMarkcode(Guid id)
+        public Markcode GetMarkcode(string id)
         {
             return _markcodeRepository.GetMarkcode(id);   
         }
