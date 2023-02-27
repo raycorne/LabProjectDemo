@@ -2,7 +2,8 @@
 {
     public interface ICameraController
     {
-        public void StartWork();
+        public void StartCameraThread();
         public void StopWork();
+        public bool isWorking();
     }
 }

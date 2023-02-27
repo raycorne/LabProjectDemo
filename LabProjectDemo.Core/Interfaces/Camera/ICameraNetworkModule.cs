@@ -2,6 +2,6 @@
 {
     public interface ICameraNetworkModule : INetworkConnector
     {
-        public void GetEncodedCode();
+        public string GetEncodedCode();
     }
 }

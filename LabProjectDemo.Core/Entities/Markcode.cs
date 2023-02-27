@@ -1,13 +1,18 @@
-﻿namespace LabProjectDemo.Core.Entities
+﻿using System.ComponentModel.DataAnnotations;
+using System.ComponentModel.DataAnnotations.Schema;
+
+namespace LabProjectDemo.Core.Entities
 {
     public class Markcode
     {
-        private Guid _id;
-        private string _code;
-        public Markcode(Guid id, string code)
+        [Key]
+        [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
+        public string? Id { get; set; }
+        public string? Code { get; set; }
+        /*public Markcode(string id, string code)
         {
-            _id = id;
-            _code = code;
-        }
+            Id = id;
+            Code = code;
+        }*/
     }
 }
