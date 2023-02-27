@@ -1,4 +1,5 @@
 ﻿using LabProjectDemo.Core.Interfaces.Camera;
+using static System.Net.Mime.MediaTypeNames;
 
 namespace LabProjectDemo.Core.Services.Camera
 {
@@ -21,6 +22,7 @@ namespace LabProjectDemo.Core.Services.Camera
 
         public string[] TrimCodes(string message)
         {
+            message = message.Substring(0, message.Length - 2);
             string[] codes;
             if (message.Contains("<start>") && message.EndsWith("<stop>"))
             {

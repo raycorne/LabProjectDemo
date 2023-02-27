@@ -13,7 +13,8 @@ namespace LabProjectDemo.Core
         private readonly IVeiwController _viewController;               // Какой-то класс из view
 
         private Thread _thread;
-        public bool isWorking { get; private set; } = false;
+        private Task _addToDbTask;
+        private bool isWorkingStatus { get; set; } = false;
 
         public CameraController(ICameraNetworkModule cameraConnector, ICameraCodeDecoder codeDecoder, 
             IMarkcodeService markcodeService, IVeiwController viewController)
@@ -32,16 +33,19 @@ namespace LabProjectDemo.Core
 
         private async void StartCameraWork()
         {
-            isWorking = true;
             try
             {
-                _cameraNetworkModule.Connect("", 23);
-                while (isWorking)
+                isWorkingStatus = true;
+                _cameraNetworkModule.Connect(/*"127.0.0.1", 8888*/);
+                while (isWorkingStatus)
                 {
                     string[] decodedCodes = _codeDecoder.Decode(_cameraNetworkModule.GetEncodedCode());
                     if (_codeDecoder.isCodesCorrected(decodedCodes))
                     {
-                        await Task.Run(() => AddCodes(decodedCodes.Take(decodedCodes.Length).ToArray()));
+                        _viewController.ShowReadedCode(decodedCodes[0]);
+                        _viewController.UpdeteCounter();
+                        _addToDbTask = Task.Run(() => AddCodes(decodedCodes.Take(decodedCodes.Length).ToArray()));
+                        await _addToDbTask;
                     }
                 }
             } catch (Exception ex)
@@ -54,13 +58,20 @@ namespace LabProjectDemo.Core
         {
             foreach (string code in codes)
             {
-                _markcodeService.AddMarkcode(new Entities.Markcode(Guid.NewGuid().ToString(), code));
+                _markcodeService.AddMarkcode(new Entities.Markcode { Id = Guid.NewGuid().ToString(), Code = code });
             }
         }
 
-        public void StopWork()
+        public async void StopWork()
         {
-            isWorking = false;
+            isWorkingStatus = false;
+            await _addToDbTask;
+            _thread.Join();
+        }
+
+        public bool isWorking()
+        {
+            return isWorkingStatus;
         }
     }
 }

@@ -2,5 +2,7 @@
 {
     public interface IVeiwController
     {
+        public void UpdeteCounter();
+        public void ShowReadedCode(string code);
     }
 }

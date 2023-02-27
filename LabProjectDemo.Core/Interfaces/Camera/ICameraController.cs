@@ -4,5 +4,6 @@
     {
         public void StartCameraThread();
         public void StopWork();
+        public bool isWorking();
     }
 }
