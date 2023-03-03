@@ -36,7 +36,7 @@ namespace LabProjectDemo.Core
             try
             {
                 isWorkingStatus = true;
-                _cameraNetworkModule.Connect(/*"127.0.0.1", 8888*/);
+                _cameraNetworkModule.Connect();
                 while (isWorkingStatus)
                 {
                     string[] decodedCodes = _codeDecoder.Decode(_cameraNetworkModule.GetEncodedCode());
