@@ -1,17 +1,28 @@
-﻿using LabProjectDemo.Core.Entities;
-using LabProjectDemo.Core.Interfaces.MarkcodeFolder;
+﻿using LabProjectDemo.Core.Interfaces.MarkcodeFolder;
 using LabProjectDemo.Infrastructure.EFCore;
+using Microsoft.EntityFrameworkCore;
 
 namespace LabProjectDemo.Infrastructure.Repositories
 {
-    public class MarkcodeRepository : IMarkcodeRepository
+    public class MarkcodeRepository<TEntity> : IMarkcodeRepository<TEntity> where TEntity : class
     {
         private AppDbContext _db;
-        public void AddMarkcode(Markcode markcode)
+        private DbContext _context;
+        private DbSet<TEntity> _dbSet;
+
+        /*public MarkcodeRepository(DbContext context)
+        {
+            _context = context;
+            //_dbSet = context.Set<TEntity>();
+            _db.Set<TEntity>();
+        }*/
+        public void AddMarkcode(TEntity markcode)
         {
             using (_db = new AppDbContext(DatabaseConfiguration.s_options))
             {
-                _db.Markcode.Add(markcode);
+                var _dbSet = _db.Set<TEntity>();
+                _dbSet.Add(markcode);
+                //_db.Markcode.Add(markcode);
                 _db.SaveChanges();
             }
         }
@@ -21,12 +32,12 @@ namespace LabProjectDemo.Infrastructure.Repositories
             throw new NotImplementedException();
         }
 
-        public List<Markcode> GetAllMarkcodes()
+        public List<TEntity> GetAllMarkcodes()
         {
             throw new NotImplementedException();
         }
 
-        public Markcode GetMarkcode(string id)
+        public TEntity GetMarkcode(string id)
         {
             throw new NotImplementedException();
         }

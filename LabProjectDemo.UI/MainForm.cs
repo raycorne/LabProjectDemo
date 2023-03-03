@@ -5,6 +5,7 @@ using LabProjectDemo.Core.Services;
 using LabProjectDemo.Infrastructure.Interfaces;
 using LabProjectDemo.Infrastructure.NetworkConnector;
 using LabProjectDemo.Infrastructure.Repositories;
+using LabProjectDemo.Core.Entities;
 
 namespace LabProjectDemo.UI
 {
@@ -15,7 +16,7 @@ namespace LabProjectDemo.UI
         {
             cameraController = new CameraController(
                 new CameraTCPConnector(), new CameraCodeDecoderService(),
-                new MarkcodeService(new MarkcodeRepository()), this);
+                new MarkcodeService<ProductMarkcode>(new MarkcodeRepository<ProductMarkcode>()), this);
             InitializeComponent();
         }
 
