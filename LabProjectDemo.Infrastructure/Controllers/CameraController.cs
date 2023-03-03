@@ -1,4 +1,5 @@
-﻿using LabProjectDemo.Core.Interfaces;
+﻿using LabProjectDemo.Core.Entities;
+using LabProjectDemo.Core.Interfaces;
 using LabProjectDemo.Core.Interfaces.Camera;
 using LabProjectDemo.Core.Interfaces.MarkcodeFolder;
 using LabProjectDemo.Infrastructure.Interfaces;
@@ -9,7 +10,7 @@ namespace LabProjectDemo.Core
     {
         private readonly ICameraNetworkModule _cameraNetworkModule;     // CameraTCPConnector
         private readonly ICameraCodeDecoder _codeDecoder;               // CameraCodeDecoderService
-        private readonly IMarkcodeService _markcodeService;             // MarkcodeService
+        private readonly IMarkcodeService<ProductMarkcode> _markcodeService;             // MarkcodeService
         private readonly IVeiwController _viewController;               // Какой-то класс из view
 
         private Thread _thread;
@@ -17,7 +18,7 @@ namespace LabProjectDemo.Core
         private bool isWorkingStatus { get; set; } = false;
 
         public CameraController(ICameraNetworkModule cameraConnector, ICameraCodeDecoder codeDecoder, 
-            IMarkcodeService markcodeService, IVeiwController viewController)
+            IMarkcodeService<ProductMarkcode> markcodeService, IVeiwController viewController)
         {
             _cameraNetworkModule = cameraConnector;
             _codeDecoder = codeDecoder;
@@ -36,7 +37,7 @@ namespace LabProjectDemo.Core
             try
             {
                 isWorkingStatus = true;
-                _cameraNetworkModule.Connect(/*"127.0.0.1", 8888*/);
+                _cameraNetworkModule.Connect();
                 while (isWorkingStatus)
                 {
                     string[] decodedCodes = _codeDecoder.Decode(_cameraNetworkModule.GetEncodedCode());
@@ -58,7 +59,7 @@ namespace LabProjectDemo.Core
         {
             foreach (string code in codes)
             {
-                _markcodeService.AddMarkcode(new Entities.Markcode { Id = Guid.NewGuid().ToString(), Code = code });
+                _markcodeService.AddMarkcode(new Entities.ProductMarkcode { Id = Guid.NewGuid().ToString(), Code = code });
             }
         }
 

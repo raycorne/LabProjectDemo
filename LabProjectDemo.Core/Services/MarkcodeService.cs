@@ -3,16 +3,16 @@ using LabProjectDemo.Core.Interfaces.MarkcodeFolder;
 
 namespace LabProjectDemo.Core.Services
 {
-    public class MarkcodeService : IMarkcodeService
+    public class MarkcodeService<TEntity> : IMarkcodeService<TEntity> where TEntity : class
     {
-        public readonly IMarkcodeRepository _markcodeRepository;
+        public readonly IMarkcodeRepository<TEntity> _markcodeRepository;
 
-        public MarkcodeService(IMarkcodeRepository markcodeRepository)
+        public MarkcodeService(IMarkcodeRepository<TEntity> markcodeRepository)
         { 
             _markcodeRepository = markcodeRepository;
         }
 
-        public void AddMarkcode(Markcode markcode)
+        public void AddMarkcode(TEntity markcode)
         {
             _markcodeRepository.AddMarkcode(markcode);
         }
@@ -22,12 +22,12 @@ namespace LabProjectDemo.Core.Services
             _markcodeRepository.DeleteMarkcodeById(id);
         }
 
-        public List<Markcode> GetAllMarkcodes()
+        public List<TEntity> GetAllMarkcodes()
         {
             return _markcodeRepository.GetAllMarkcodes();
         }
 
-        public Markcode GetMarkcode(string id)
+        public TEntity GetMarkcode(string id)
         {
             return _markcodeRepository.GetMarkcode(id);   
         }
