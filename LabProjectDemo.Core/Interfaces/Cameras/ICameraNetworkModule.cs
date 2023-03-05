@@ -1,4 +1,4 @@
-﻿namespace LabProjectDemo.Core.Interfaces.Camera
+﻿namespace LabProjectDemo.Core.Interfaces.Cameras
 {
     public interface ICameraNetworkModule : INetworkConnector
     {

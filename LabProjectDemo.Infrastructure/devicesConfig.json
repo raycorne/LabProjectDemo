@@ -1,6 +1,38 @@
 {
+  "LinesConfiguration": {
+    "Lines": [
+      {
+        "ProductCamera": [
+          {
+            "ip": "127.0.0.1",
+            "port": 8888
+          }
+        ],
+        "BoxCamera": [
+          {
+            "ip": "127.0.0.1",
+            "port": 8888
+          }
+        ],
+        "PalletCamera": [
+          {
+            "ip": "127.0.0.1",
+            "port": 8888
+          }
+        ],
+        "Printer": [
+          {
+            "ip": "127.0.0.1",
+            "port": 8888
+          }
+        ]
+      }
+    ]
+  },
+
   "MainCamera": {
     "ip": "127.0.0.1",
-    "port":  8888
+    "port": 8888
   }
+    
 }

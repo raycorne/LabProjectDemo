@@ -1,5 +1,4 @@
-﻿using LabProjectDemo.Core.Entities;
-using LabProjectDemo.Core.Interfaces.MarkcodeFolder;
+﻿using LabProjectDemo.Core.Interfaces.Markcodes;
 
 namespace LabProjectDemo.Core.Services
 {
@@ -8,7 +7,7 @@ namespace LabProjectDemo.Core.Services
         public readonly IMarkcodeRepository<TEntity> _markcodeRepository;
 
         public MarkcodeService(IMarkcodeRepository<TEntity> markcodeRepository)
-        { 
+        {
             _markcodeRepository = markcodeRepository;
         }
 
@@ -29,7 +28,7 @@ namespace LabProjectDemo.Core.Services
 
         public TEntity GetMarkcode(string id)
         {
-            return _markcodeRepository.GetMarkcode(id);   
+            return _markcodeRepository.GetMarkcode(id);
         }
     }
 }

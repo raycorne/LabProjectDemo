@@ -1,10 +1,3 @@
-using LabProjectDemo.Core;
-using LabProjectDemo.Core.Interfaces.Camera;
-using LabProjectDemo.Core.Services;
-using LabProjectDemo.Core.Services.Camera;
-using LabProjectDemo.Infrastructure.NetworkConnector;
-using LabProjectDemo.Infrastructure.Repositories;
-
 namespace LabProjectDemo.UI
 {
     internal static class Program

@@ -1,5 +1,5 @@
 using LabProjectDemo.Core;
-using LabProjectDemo.Core.Interfaces.Camera;
+using LabProjectDemo.Core.Interfaces.Cameras;
 using LabProjectDemo.Core.Services.Camera;
 using LabProjectDemo.Core.Services;
 using LabProjectDemo.Infrastructure.Interfaces;

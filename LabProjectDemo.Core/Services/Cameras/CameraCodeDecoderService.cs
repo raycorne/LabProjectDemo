@@ -1,5 +1,4 @@
-﻿using LabProjectDemo.Core.Interfaces.Camera;
-using static System.Net.Mime.MediaTypeNames;
+﻿using LabProjectDemo.Core.Interfaces.Cameras;
 
 namespace LabProjectDemo.Core.Services.Camera
 {

@@ -1,4 +1,4 @@
-﻿using LabProjectDemo.Core.Interfaces.PrinterInterfaces;
+﻿using LabProjectDemo.Core.Interfaces.Printers;
 
 namespace LabProjectDemo.Infrastructure.Controllers
 {

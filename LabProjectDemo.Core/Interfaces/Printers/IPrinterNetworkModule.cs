@@ -1,4 +1,4 @@
-﻿namespace LabProjectDemo.Core.Interfaces.PrinterInterfaces
+﻿namespace LabProjectDemo.Core.Interfaces.Printers
 {
     public interface IPrinterNetworkModule : INetworkConnector
     {

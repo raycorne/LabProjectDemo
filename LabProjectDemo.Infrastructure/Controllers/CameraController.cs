@@ -1,8 +1,12 @@
 ﻿using LabProjectDemo.Core.Entities;
-using LabProjectDemo.Core.Interfaces;
-using LabProjectDemo.Core.Interfaces.Camera;
-using LabProjectDemo.Core.Interfaces.MarkcodeFolder;
+using LabProjectDemo.Core.Interfaces.Cameras;
+using LabProjectDemo.Core.Interfaces.Markcodes;
+using LabProjectDemo.Core.Services;
+using LabProjectDemo.Core.Services.Camera;
+using LabProjectDemo.Infrastructure.Cameras;
 using LabProjectDemo.Infrastructure.Interfaces;
+using LabProjectDemo.Infrastructure.NetworkConnector;
+using LabProjectDemo.Infrastructure.Repositories;
 
 namespace LabProjectDemo.Core
 {
@@ -17,7 +21,7 @@ namespace LabProjectDemo.Core
         private Task _addToDbTask;
         private bool isWorkingStatus { get; set; } = false;
 
-        public CameraController(ICameraNetworkModule cameraConnector, ICameraCodeDecoder codeDecoder, 
+        public CameraController(ICameraNetworkModule cameraConnector, ICameraCodeDecoder codeDecoder,
             IMarkcodeService<ProductMarkcode> markcodeService, IVeiwController viewController)
         {
             _cameraNetworkModule = cameraConnector;
@@ -49,7 +53,8 @@ namespace LabProjectDemo.Core
                         await _addToDbTask;
                     }
                 }
-            } catch (Exception ex)
+            }
+            catch (Exception ex)
             {
 
             }

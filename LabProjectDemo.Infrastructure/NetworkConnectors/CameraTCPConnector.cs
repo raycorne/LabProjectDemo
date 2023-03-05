@@ -1,4 +1,5 @@
-﻿using LabProjectDemo.Core.Interfaces.Camera;
+﻿using LabProjectDemo.Core.Interfaces.Cameras;
+using LabProjectDemo.Infrastructure.ProductionLines.DTO;
 using Microsoft.Extensions.Configuration;
 using System.Net.Sockets;
 using System.Text;
@@ -11,6 +12,18 @@ namespace LabProjectDemo.Infrastructure.NetworkConnector
         private int _port = 0;
         private TcpClient _tcpClient = null;
         private NetworkStream _stream;
+
+        public CameraTCPConnector()
+        {
+            _ip = null;
+            _port = 0;
+        }
+
+        public CameraTCPConnector(string? ip, int port)
+        {
+            _ip = ip;
+            _port = port;
+        }
 
         public void Connect()
         {
@@ -27,6 +40,7 @@ namespace LabProjectDemo.Infrastructure.NetworkConnector
             }
         }
 
+        public IConfiguration AppConfiguration { get; set; }
         private void GetConnectionDataFromJson()
         {
             var configuration = new ConfigurationBuilder()
@@ -44,7 +58,7 @@ namespace LabProjectDemo.Infrastructure.NetworkConnector
                 _stream.Close();
                 _stream = null;
             }
-            if(_tcpClient != null)
+            if (_tcpClient != null)
             {
                 _tcpClient.Close();
                 _tcpClient = null;

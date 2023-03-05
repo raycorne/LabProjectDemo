@@ -1,6 +1,4 @@
-﻿using LabProjectDemo.Core.Entities;
-
-namespace LabProjectDemo.Core.Interfaces.MarkcodeFolder
+﻿namespace LabProjectDemo.Core.Interfaces.Markcodes
 {
     public interface IMarkcodeRepository<TEntity> where TEntity : class
     {
