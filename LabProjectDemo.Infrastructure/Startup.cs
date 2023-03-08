@@ -8,12 +8,13 @@ namespace LabProjectDemo.Infrastructure
     {
         public bool isConfiguratedSuccess { get; private set; }
         public MainLinesCfgJsonDTO? LinesConfiguration { get; set; }
-        public List<ProductionLine> ProductionLines { get; set; } = new();
+        private List<ProductionLine> _productionLines = new();
         private ProductionLineConfigurationBuilder _lineConfigurationBuilder;
 
         public Startup()
         {
             GetLinesConfigurationFromJson();
+            _productionLines = new();
             ConfigurateLines();
         }
 
@@ -36,8 +37,13 @@ namespace LabProjectDemo.Infrastructure
             foreach (var line in LinesConfiguration.Lines)
             {
                 _lineConfigurationBuilder = new ProductionLineConfigurationBuilder(line);
-                ProductionLines.Add(_lineConfigurationBuilder.GetBuildedProductionLine());
+                _productionLines.Add(_lineConfigurationBuilder.GetBuildedProductionLine());
             }
+        }
+
+        public List<ProductionLine> GetConfiguretedProductionLines()
+        {
+            return _productionLines;
         }
 
     }

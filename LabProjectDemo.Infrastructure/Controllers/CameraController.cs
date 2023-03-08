@@ -1,12 +1,7 @@
 ﻿using LabProjectDemo.Core.Entities;
 using LabProjectDemo.Core.Interfaces.Cameras;
 using LabProjectDemo.Core.Interfaces.Markcodes;
-using LabProjectDemo.Core.Services;
-using LabProjectDemo.Core.Services.Camera;
-using LabProjectDemo.Infrastructure.Cameras;
 using LabProjectDemo.Infrastructure.Interfaces;
-using LabProjectDemo.Infrastructure.NetworkConnector;
-using LabProjectDemo.Infrastructure.Repositories;
 
 namespace LabProjectDemo.Core
 {

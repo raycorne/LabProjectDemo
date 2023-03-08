@@ -4,10 +4,15 @@ namespace LabProjectDemo.Infrastructure.ProductionLines
 {
     public class ProductionLine
     {
-        public ProductCamera productCamera;
-        public BoxCamera boxCamera;
-        public PalletCamera palletCamera;
+        public List<ProductCamera> productCameras;
+        public List<BoxCamera> boxCameras;
+        public List<PalletCamera> palletCameras;
         //public Printer printer;
+
+        public void StartWork()
+        {
+
+        }
     }
 }
     
