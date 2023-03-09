@@ -20,5 +20,9 @@ namespace LabProjectDemo.Infrastructure.Cameras
             _viewController = viewController;
         }
 
+        public void Connect()
+        {
+            _cameraNetworkModule.Connect();
+        }
     }
 }

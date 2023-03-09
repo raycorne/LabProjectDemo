@@ -31,7 +31,7 @@ namespace LabProjectDemo.Infrastructure.ProductionLines
             return _productionLineBuilder.Build();
         }
 
-        public void Configurate()
+        private void Configurate()
         {
             if (_line.productCamera != null)
             {
