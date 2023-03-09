@@ -1,17 +1,18 @@
-﻿using LabProjectDemo.Core.Interfaces.Markcodes;
+﻿using LabProjectDemo.Core.DTO;
+using LabProjectDemo.Core.Interfaces.Markcodes;
 
 namespace LabProjectDemo.Core.Services
 {
-    public class MarkcodeService<TEntity> : IMarkcodeService<TEntity> where TEntity : class
+    public class MarkcodeService : IMarkcodeService
     {
-        public readonly IMarkcodeRepository<TEntity> _markcodeRepository;
+        public readonly IMarkcodeRepository _markcodeRepository;
 
-        public MarkcodeService(IMarkcodeRepository<TEntity> markcodeRepository)
+        public MarkcodeService(IMarkcodeRepository markcodeRepository)
         {
             _markcodeRepository = markcodeRepository;
         }
 
-        public void AddMarkcode(TEntity markcode)
+        public void AddMarkcode(MarkcodeDbDTO markcode)
         {
             _markcodeRepository.AddMarkcode(markcode);
         }
@@ -21,12 +22,12 @@ namespace LabProjectDemo.Core.Services
             _markcodeRepository.DeleteMarkcodeById(id);
         }
 
-        public List<TEntity> GetAllMarkcodes()
+        public List<MarkcodeDbDTO> GetAllMarkcodes()
         {
             return _markcodeRepository.GetAllMarkcodes();
         }
 
-        public TEntity GetMarkcode(string id)
+        public MarkcodeDbDTO GetMarkcode(string id)
         {
             return _markcodeRepository.GetMarkcode(id);
         }

@@ -9,15 +9,15 @@ namespace LabProjectDemo.Core
     {
         private readonly ICameraNetworkModule _cameraNetworkModule;     // CameraTCPConnector
         private readonly ICameraCodeDecoder _codeDecoder;               // CameraCodeDecoderService
-        private readonly IMarkcodeService<ProductMarkcode> _markcodeService;             // MarkcodeService
-        private readonly IVeiwController _viewController;               // Какой-то класс из view
+        private readonly IMarkcodeService _markcodeService;             // MarkcodeService
+        private readonly IMainView _viewController;               // Какой-то класс из view
 
         private Thread _thread;
         private Task _addToDbTask;
         private bool isWorkingStatus { get; set; } = false;
 
         public CameraController(ICameraNetworkModule cameraConnector, ICameraCodeDecoder codeDecoder,
-            IMarkcodeService<ProductMarkcode> markcodeService, IVeiwController viewController)
+            IMarkcodeService markcodeService, IMainView viewController)
         {
             _cameraNetworkModule = cameraConnector;
             _codeDecoder = codeDecoder;
@@ -59,7 +59,7 @@ namespace LabProjectDemo.Core
         {
             foreach (string code in codes)
             {
-                _markcodeService.AddMarkcode(new Entities.ProductMarkcode { Id = Guid.NewGuid().ToString(), Code = code });
+                //_markcodeService.AddMarkcode(new Entities.ProductMarkcode { Id = Guid.NewGuid().ToString(), Code = code });
             }
         }
 

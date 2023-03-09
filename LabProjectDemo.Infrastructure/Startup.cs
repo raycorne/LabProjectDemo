@@ -1,4 +1,5 @@
-﻿using LabProjectDemo.Infrastructure.ProductionLines;
+﻿using LabProjectDemo.Infrastructure.Interfaces;
+using LabProjectDemo.Infrastructure.ProductionLines;
 using LabProjectDemo.Infrastructure.ProductionLines.DTO;
 using Microsoft.Extensions.Configuration;
 
@@ -10,7 +11,6 @@ namespace LabProjectDemo.Infrastructure
         public MainLinesCfgJsonDTO? LinesConfiguration { get; set; }
         private List<ProductionLine> _productionLines = new();
         private ProductionLineConfigurationBuilder _lineConfigurationBuilder;
-
         public Startup()
         {
             GetLinesConfigurationFromJson();
@@ -18,7 +18,7 @@ namespace LabProjectDemo.Infrastructure
             ConfigurateLines();
         }
 
-        public void GetLinesConfigurationFromJson()
+        private void GetLinesConfigurationFromJson()
         {
             var configuration = new ConfigurationBuilder()
                 .SetBasePath(Directory.GetCurrentDirectory())
@@ -32,7 +32,7 @@ namespace LabProjectDemo.Infrastructure
             }
         }
 
-        public void ConfigurateLines()
+        private void ConfigurateLines()
         {
             foreach (var line in LinesConfiguration.Lines)
             {

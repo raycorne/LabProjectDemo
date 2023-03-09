@@ -4,5 +4,7 @@
     {
         public void StartCamera(int index);
         public void StopCamera(int index);
+
+        public bool isWorking(int index);
     }
 }

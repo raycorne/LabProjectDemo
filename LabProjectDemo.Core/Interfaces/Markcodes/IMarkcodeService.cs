@@ -1,10 +1,12 @@
-﻿namespace LabProjectDemo.Core.Interfaces.Markcodes
+﻿using LabProjectDemo.Core.DTO;
+
+namespace LabProjectDemo.Core.Interfaces.Markcodes
 {
-    public interface IMarkcodeService<TEntity> where TEntity : class
+    public interface IMarkcodeService
     {
-        public void AddMarkcode(TEntity markcode);
+        public void AddMarkcode(MarkcodeDbDTO markcode);
         public void DeleteMarkcodeById(string id);
-        public TEntity GetMarkcode(string id);
-        public List<TEntity> GetAllMarkcodes();
+        public MarkcodeDbDTO GetMarkcode(string id);
+        public List<MarkcodeDbDTO> GetAllMarkcodes();
     }
 }

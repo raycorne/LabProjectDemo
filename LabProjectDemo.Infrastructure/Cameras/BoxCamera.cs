@@ -7,9 +7,9 @@ namespace LabProjectDemo.Infrastructure.Cameras
 {
     public class BoxCamera : Camera
     {
-        private readonly IMarkcodeService<BoxMarkcode> _markcodeService;
+        private readonly IMarkcodeService _markcodeService;
         public BoxCamera(ICameraNetworkModule cameraNetworkModule, ICameraCodeDecoder codeDecoder,
-            IMarkcodeService<BoxMarkcode> markcodeService, IVeiwController viewController)
+            IMarkcodeService markcodeService, IMainView viewController)
             : base(cameraNetworkModule, codeDecoder, viewController)
         {
             _markcodeService = markcodeService;

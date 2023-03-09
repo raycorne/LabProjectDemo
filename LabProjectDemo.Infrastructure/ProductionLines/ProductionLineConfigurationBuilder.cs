@@ -18,7 +18,7 @@ namespace LabProjectDemo.Infrastructure.ProductionLines
         public bool isPrinterAvailable { get; private set; } = false;
 
         private LineJsonDTO _line;
-        private IVeiwController _veiwController;
+        private IMainView _veiwController;
         public ProductionLineConfigurationBuilder(LineJsonDTO line)
         {
             _line = line;
@@ -42,7 +42,7 @@ namespace LabProjectDemo.Infrastructure.ProductionLines
                     productCameras.Add(new ProductCamera(
                         new CameraTCPConnector(productCamera.ip, productCamera.port),
                         new CameraCodeDecoderService(),
-                        new MarkcodeService<ProductMarkcode>(new MarkcodeRepository<ProductMarkcode>()),
+                        new MarkcodeService(new MarkcodeRepository()),
                         _veiwController));
                 }
                 _productionLineBuilder.SetProductCamera(productCameras);
@@ -56,7 +56,7 @@ namespace LabProjectDemo.Infrastructure.ProductionLines
                     boxCameras.Add(new BoxCamera(
                         new CameraTCPConnector(boxCamera.ip, boxCamera.port),
                         new CameraCodeDecoderService(),
-                        new MarkcodeService<BoxMarkcode>(new MarkcodeRepository<BoxMarkcode>()),
+                        new MarkcodeService(new MarkcodeRepository()),
                         _veiwController));
                 }
                 _productionLineBuilder.SetBoxCamera(boxCameras);
@@ -70,7 +70,7 @@ namespace LabProjectDemo.Infrastructure.ProductionLines
                     palletCameras.Add(new PalletCamera(
                         new CameraTCPConnector(palletCamera.ip, palletCamera.port),
                         new CameraCodeDecoderService(),
-                        new MarkcodeService<PalletMarkcode>(new MarkcodeRepository<PalletMarkcode>()),
+                        new MarkcodeService(new MarkcodeRepository()),
                         _veiwController));
                 }
                 _productionLineBuilder.SetPalletCamera(palletCameras);

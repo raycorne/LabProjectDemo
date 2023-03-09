@@ -1,4 +1,4 @@
-﻿namespace LabProjectDemo.Core.Entities
+﻿    namespace LabProjectDemo.Core.Entities
 {
     public class BoxMarkcode : Markcode
     {

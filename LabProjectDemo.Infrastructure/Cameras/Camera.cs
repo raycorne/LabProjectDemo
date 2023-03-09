@@ -10,10 +10,10 @@ namespace LabProjectDemo.Infrastructure.Cameras
         protected readonly ICameraNetworkModule _cameraNetworkModule;     // CameraTCPConnector
         protected readonly ICameraCodeDecoder _codeDecoder;               // CameraCodeDecoderService
         
-        protected readonly IVeiwController _viewController;               // Какой-то класс из view
+        protected readonly IMainView _viewController;               // Какой-то класс из view
 
         public Camera(ICameraNetworkModule cameraNetworkModule,
-            ICameraCodeDecoder codeDecoder, IVeiwController viewController)
+            ICameraCodeDecoder codeDecoder, IMainView viewController)
         {
             _cameraNetworkModule = cameraNetworkModule;
             _codeDecoder = codeDecoder;
@@ -23,6 +23,11 @@ namespace LabProjectDemo.Infrastructure.Cameras
         public void Connect()
         {
             _cameraNetworkModule.Connect();
+        }
+
+        public string[] GetCode()
+        {
+            return _codeDecoder.Decode(_cameraNetworkModule.GetEncodedCode());
         }
     }
 }
