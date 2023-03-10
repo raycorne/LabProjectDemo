@@ -45,15 +45,15 @@ namespace LabProjectDemo.UI
 
         async private void workButton_Click(object sender, EventArgs e)
         {
-            if (_deviceController.isWorking(1))
+            if (_deviceController.isWorking(0) != true)
             {
-                _deviceController.StartCamera(1);
+                _deviceController.StartCamera(0);
                 workButton.Text = "Stop";
             }
             else
             {
                 workButton.Enabled = false;
-                await Task.Run(() => _deviceController.StopCamera(1));
+                await Task.Run(() => _deviceController.StopCamera(0));
                 workButton.Enabled = true;
                 workButton.Text = "Start";
             }

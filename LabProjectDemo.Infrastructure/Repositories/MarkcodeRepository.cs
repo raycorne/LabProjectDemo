@@ -11,7 +11,7 @@ namespace LabProjectDemo.Infrastructure.Repositories
         /*private DbContext _context;
         private DbSet<MarkcodeDbDTO> _dbSet;*/
 
-        public void AddMarkcode(MarkcodeDbDTO markcode)
+        public void AddMarkcode(MarkcodeDTO markcode)
         {
             using (_db = new AppDbContext(DatabaseConfiguration.s_options))
             {
@@ -51,12 +51,12 @@ namespace LabProjectDemo.Infrastructure.Repositories
             throw new NotImplementedException();
         }
 
-        public List<MarkcodeDbDTO> GetAllMarkcodes()
+        public List<MarkcodeDTO> GetAllMarkcodes()
         {
             throw new NotImplementedException();
         }
 
-        public MarkcodeDbDTO GetMarkcode(string id)
+        public MarkcodeDTO GetMarkcode(string id)
         {
             throw new NotImplementedException();
         }

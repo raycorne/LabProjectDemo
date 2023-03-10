@@ -36,42 +36,36 @@ namespace LabProjectDemo.Infrastructure.ProductionLines
             if (_line.productCamera != null)
             {
                 isProductCamerasAvailable = true;
-                List<ProductCamera> productCameras = new List<ProductCamera>();
+                List<Camera> productCameras = new List<Camera>();
                 foreach(CameraJsonDTO productCamera in _line.productCamera)
                 {
-                    productCameras.Add(new ProductCamera(
+                    productCameras.Add(new Camera(
                         new CameraTCPConnector(productCamera.ip, productCamera.port),
-                        new CameraCodeDecoderService(),
-                        new MarkcodeService(new MarkcodeRepository()),
-                        _veiwController));
+                        new CameraCodeDecoderService()));
                 }
                 _productionLineBuilder.SetProductCamera(productCameras);
             }
             if (_line.boxCamera != null)
             {
                 isBoxCamerasAvailable = true;
-                List<BoxCamera> boxCameras = new List<BoxCamera>();
+                List<Camera> boxCameras = new List<Camera>();
                 foreach(CameraJsonDTO boxCamera in _line.boxCamera)
                 {
-                    boxCameras.Add(new BoxCamera(
+                    boxCameras.Add(new Camera(
                         new CameraTCPConnector(boxCamera.ip, boxCamera.port),
-                        new CameraCodeDecoderService(),
-                        new MarkcodeService(new MarkcodeRepository()),
-                        _veiwController));
+                        new CameraCodeDecoderService()));
                 }
                 _productionLineBuilder.SetBoxCamera(boxCameras);
             }
             if (_line.palletCamera != null)
             {
                 isPalletCamerasAvailable = true;
-                List<PalletCamera> palletCameras = new List<PalletCamera>();
+                List<Camera> palletCameras = new List<Camera>();
                 foreach(CameraJsonDTO palletCamera in _line.palletCamera)
                 {
-                    palletCameras.Add(new PalletCamera(
+                    palletCameras.Add(new Camera(
                         new CameraTCPConnector(palletCamera.ip, palletCamera.port),
-                        new CameraCodeDecoderService(),
-                        new MarkcodeService(new MarkcodeRepository()),
-                        _veiwController));
+                        new CameraCodeDecoderService()));
                 }
                 _productionLineBuilder.SetPalletCamera(palletCameras);
             }

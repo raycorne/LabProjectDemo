@@ -5,19 +5,18 @@ using LabProjectDemo.Infrastructure.Interfaces;
 
 namespace LabProjectDemo.Infrastructure.Cameras
 {
-    public abstract class Camera
+    public class Camera
     {
         protected readonly ICameraNetworkModule _cameraNetworkModule;     // CameraTCPConnector
         protected readonly ICameraCodeDecoder _codeDecoder;               // CameraCodeDecoderService
         
-        protected readonly IMainView _viewController;               // Какой-то класс из view
+        //protected readonly IMainView _viewController;               // Какой-то класс из view
 
         public Camera(ICameraNetworkModule cameraNetworkModule,
-            ICameraCodeDecoder codeDecoder, IMainView viewController)
+            ICameraCodeDecoder codeDecoder)
         {
             _cameraNetworkModule = cameraNetworkModule;
             _codeDecoder = codeDecoder;
-            _viewController = viewController;
         }
 
         public void Connect()

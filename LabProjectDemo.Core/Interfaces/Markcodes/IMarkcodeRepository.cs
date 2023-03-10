@@ -4,9 +4,9 @@ namespace LabProjectDemo.Core.Interfaces.Markcodes
 {
     public interface IMarkcodeRepository
     {
-        public void AddMarkcode(MarkcodeDbDTO markcode);
+        public void AddMarkcode(MarkcodeDTO markcode);
         public void DeleteMarkcodeById(string id);
-        public MarkcodeDbDTO GetMarkcode(string id);
-        public List<MarkcodeDbDTO> GetAllMarkcodes();
+        public MarkcodeDTO GetMarkcode(string id);
+        public List<MarkcodeDTO> GetAllMarkcodes();
     }
 }

@@ -12,7 +12,7 @@ namespace LabProjectDemo.Core.Services
             _markcodeRepository = markcodeRepository;
         }
 
-        public void AddMarkcode(MarkcodeDbDTO markcode)
+        public void AddMarkcode(MarkcodeDTO markcode)
         {
             _markcodeRepository.AddMarkcode(markcode);
         }
@@ -22,12 +22,12 @@ namespace LabProjectDemo.Core.Services
             _markcodeRepository.DeleteMarkcodeById(id);
         }
 
-        public List<MarkcodeDbDTO> GetAllMarkcodes()
+        public List<MarkcodeDTO> GetAllMarkcodes()
         {
             return _markcodeRepository.GetAllMarkcodes();
         }
 
-        public MarkcodeDbDTO GetMarkcode(string id)
+        public MarkcodeDTO GetMarkcode(string id)
         {
             return _markcodeRepository.GetMarkcode(id);
         }

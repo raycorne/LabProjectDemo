@@ -12,20 +12,20 @@ namespace LabProjectDemo.Infrastructure.ProductionLines
             return _productionLine;
         }
 
-        public IProductionLineBuilder SetBoxCamera(List<BoxCamera> boxCamera)
+        public IProductionLineBuilder SetBoxCamera(List<Camera> boxCamera)
         {
             _productionLine.boxCameras = boxCamera;
             return this;
         }
 
-        public IProductionLineBuilder SetPalletCamera(List<PalletCamera> palletCamera)
+        public IProductionLineBuilder SetPalletCamera(List<Camera> palletCamera)
         {
 
             _productionLine.palletCameras = palletCamera;
             return this;
         }
 
-        public IProductionLineBuilder SetProductCamera(List<ProductCamera> productCamera)
+        public IProductionLineBuilder SetProductCamera(List<Camera> productCamera)
         {
             _productionLine.productCameras = productCamera;
             return this;

@@ -5,9 +5,9 @@ namespace LabProjectDemo.Infrastructure.Interfaces
 {
     public interface IProductionLineBuilder
     {
-        IProductionLineBuilder SetProductCamera(List<ProductCamera> productCamera);
-        IProductionLineBuilder SetBoxCamera(List<BoxCamera> boxCamera);
-        IProductionLineBuilder SetPalletCamera(List<PalletCamera> palletCamera);
+        IProductionLineBuilder SetProductCamera(List<Camera> productCamera);
+        IProductionLineBuilder SetBoxCamera(List<Camera> boxCamera);
+        IProductionLineBuilder SetPalletCamera(List<Camera> palletCamera);
 
         ProductionLine Build();
     }

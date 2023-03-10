@@ -1,5 +1,4 @@
 ﻿using LabProjectDemo.Core.DTO;
-using LabProjectDemo.Core.Entities;
 using LabProjectDemo.Core.Interfaces.Markcodes;
 using LabProjectDemo.Core.Services;
 using LabProjectDemo.Infrastructure.Cameras;
@@ -9,9 +8,9 @@ namespace LabProjectDemo.Infrastructure.ProductionLines
 {
     public class ProductionLine
     {
-        public List<ProductCamera>? productCameras;
-        public List<BoxCamera>? boxCameras;
-        public List<PalletCamera>? palletCameras;
+        public List<Camera>? productCameras;
+        public List<Camera>? boxCameras;
+        public List<Camera>? palletCameras;
         //public Printer printer;
 
         private readonly IMarkcodeService _markcodeService;
@@ -20,8 +19,8 @@ namespace LabProjectDemo.Infrastructure.ProductionLines
         private Task _addToDbTask;
 
         public bool isWorking { get; private set; } = false;
-        private int _requiredAmountOfProducts = 0;
-        private int _requiredAmountOfBoxs = 0;
+        private int _requiredAmountOfProducts = 16;
+        private int _requiredAmountOfBoxs = 10;
 
         public ProductionLine()
         {
@@ -42,33 +41,15 @@ namespace LabProjectDemo.Infrastructure.ProductionLines
                 isWorking = true;
                 DeviceConnection();
 
-                MarkcodeDbDTO pallets = new();
-                List<MarkcodeDbDTO> boxes = new();
-                List<MarkcodeDbDTO> products = new() ;
-                string[] productCode = new string[] { };
-                string boxCode;
-                string palletCode;
+                MarkcodeDTO pallet = new();
+
+
 
                 while (isWorking)
                 {
-                    while (productCode.Length != _requiredAmountOfProducts)
-                    {
-                        productCode = productCameras[0].GetCode();
-                    }
-                    foreach (var product in productCode)
-                    {
-                        products.Add(new MarkcodeDbDTO { code = product, markcodeDbDTOs = null });
-                    }
-                    boxCode = boxCameras[0].GetCode()[0];
-                    boxes.Add(new MarkcodeDbDTO { code = boxCode, markcodeDbDTOs = products });
-                    palletCode = palletCameras[0].GetCode()[0];
-                    pallets = new MarkcodeDbDTO { code = palletCode, markcodeDbDTOs = boxes };
-                    _addToDbTask = Task.Run(() =>
-                    {
-                        _markcodeService.AddMarkcode(pallets);
-                    });
-                    
-
+                    pallet = GetOnePallet();
+                    _addToDbTask = Task.Run(() => { _markcodeService.AddMarkcode(pallet); });
+                    await _addToDbTask;
                     /*                    string[] decodedCodes = _codeDecoder.Decode(_cameraNetworkModule.GetEncodedCode());
                                         if (_codeDecoder.isCodesCorrected(decodedCodes))
                                         {
@@ -101,8 +82,31 @@ namespace LabProjectDemo.Infrastructure.ProductionLines
             }
         }
 
+        private MarkcodeDTO GetOnePallet()
+        {
+            List<MarkcodeDTO> boxes = new();
+            List<MarkcodeDTO> products = new();
+            string boxCode;
+            string palletCode;
+            while (boxes.Count < _requiredAmountOfBoxs)
+            {
+                while (products.Count < _requiredAmountOfProducts)
+                {
+                    foreach (var product in productCameras[0].GetCode())
+                    {
+                        products.Add(new MarkcodeDTO { code = product, markcodeDTOs = null });
+                    }
+                }
+                boxCode = boxCameras[0].GetCode()[0];
+                boxes.Add(new MarkcodeDTO { code = boxCode, markcodeDTOs = products });
+            }
+            palletCode = palletCameras[0].GetCode()[0];
+            return new MarkcodeDTO { code = palletCode, markcodeDTOs = boxes };
+        }
+
         async public void StopWork()
         {
+            isWorking = false;
             await _addToDbTask;
             _lineThread.Join();
         }

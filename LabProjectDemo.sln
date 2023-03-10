@@ -9,7 +9,7 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "LabProjectDemo.Core", "LabP
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "LabProjectDemo.Infrastructure", "LabProjectDemo.Infrastructure\LabProjectDemo.Infrastructure.csproj", "{DDA3E754-8BC8-47F3-BD2E-83063F53CB08}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "LabProjectDemo.UI", "LabProjectDemo.UI\LabProjectDemo.UI.csproj", "{E4796E7C-9285-4118-808D-F0B3CBEAF2CE}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "LabProjectDemo.UI", "LabProjectDemo.UI\LabProjectDemo.UI.csproj", "{E4796E7C-9285-4118-808D-F0B3CBEAF2CE}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
