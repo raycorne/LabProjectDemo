@@ -2,8 +2,8 @@
 {
     public interface IDeviceController
     {
-        public void StartCamera(int index);
-        public void StopCamera(int index);
+        public void StartLine(int index);
+        public void StopLine(int index);
 
         public bool isWorking(int index);
     }

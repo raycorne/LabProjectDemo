@@ -1,13 +1,13 @@
-﻿using LabProjectDemo.Infrastructure.Cameras;
+﻿using LabProjectDemo.Core.Interfaces;
 using LabProjectDemo.Infrastructure.ProductionLines;
 
 namespace LabProjectDemo.Infrastructure.Interfaces
 {
     public interface IProductionLineBuilder
     {
-        IProductionLineBuilder SetProductCamera(List<Camera> productCamera);
-        IProductionLineBuilder SetBoxCamera(List<Camera> boxCamera);
-        IProductionLineBuilder SetPalletCamera(List<Camera> palletCamera);
+        IProductionLineBuilder SetProductCamera(List<IMarkcodeDevice> productCamera);
+        IProductionLineBuilder SetBoxCamera(List<IMarkcodeDevice> boxCamera);
+        IProductionLineBuilder SetPalletCamera(List<IMarkcodeDevice> palletCamera);
 
         ProductionLine Build();
     }

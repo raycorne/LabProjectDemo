@@ -1,7 +1,7 @@
 ﻿using LabProjectDemo.Core.Entities;
 using LabProjectDemo.Core.Interfaces.Cameras;
 using LabProjectDemo.Core.Interfaces.Markcodes;
-using LabProjectDemo.Infrastructure.Interfaces;
+using LabProjectDemo.Infrastructure.Interfaces.UIs;
 
 namespace LabProjectDemo.Core
 {
@@ -39,14 +39,14 @@ namespace LabProjectDemo.Core
                 _cameraNetworkModule.Connect();
                 while (isWorkingStatus)
                 {
-                    string[] decodedCodes = _codeDecoder.Decode(_cameraNetworkModule.GetEncodedCode());
+                    /*string[] decodedCodes = _codeDecoder.Decode(_cameraNetworkModule.GetEncodedCode());
                     if (_codeDecoder.isCodesCorrected(decodedCodes))
                     {
                         _viewController.ShowReadedCode(decodedCodes[0]);
                         _viewController.UpdeteCounter();
                         _addToDbTask = Task.Run(() => AddCodes(decodedCodes.Take(decodedCodes.Length).ToArray()));
                         await _addToDbTask;
-                    }
+                    }*/
                 }
             }
             catch (Exception ex)

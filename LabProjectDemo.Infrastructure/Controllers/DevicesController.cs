@@ -1,5 +1,5 @@
 ﻿using LabProjectDemo.Core.Interfaces;
-using LabProjectDemo.Infrastructure.Interfaces;
+using LabProjectDemo.Infrastructure.Interfaces.UIs;
 using LabProjectDemo.Infrastructure.ProductionLines;
 
 namespace LabProjectDemo.Infrastructure.Controllers
@@ -15,12 +15,12 @@ namespace LabProjectDemo.Infrastructure.Controllers
             _mainView = mainView;
         }
 
-        public void StartCamera(int index)
+        public void StartLine(int index)
         {
             _lines[index].StartWork();
         }
 
-        public void StopCamera(int index)
+        public void StopLine(int index)
         {
             _lines[index].StopWork();
         }

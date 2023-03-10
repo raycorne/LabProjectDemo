@@ -1,19 +1,21 @@
 ﻿using LabProjectDemo.Core.DTO;
+using LabProjectDemo.Core.Interfaces;
 using LabProjectDemo.Core.Interfaces.Markcodes;
 using LabProjectDemo.Core.Services;
-using LabProjectDemo.Infrastructure.Cameras;
+using LabProjectDemo.Infrastructure.Interfaces.UIs;
 using LabProjectDemo.Infrastructure.Repositories;
 
 namespace LabProjectDemo.Infrastructure.ProductionLines
 {
     public class ProductionLine
     {
-        public List<Camera>? productCameras;
-        public List<Camera>? boxCameras;
-        public List<Camera>? palletCameras;
+        public List<IMarkcodeDevice>? productCameras;
+        public List<IMarkcodeDevice>? boxCameras;
+        public List<IMarkcodeDevice>? palletCameras;
         //public Printer printer;
 
         private readonly IMarkcodeService _markcodeService;
+        private readonly ILineView _lineView;
 
         private Thread _lineThread;
         private Task _addToDbTask;
@@ -22,8 +24,9 @@ namespace LabProjectDemo.Infrastructure.ProductionLines
         private int _requiredAmountOfProducts = 16;
         private int _requiredAmountOfBoxs = 10;
 
-        public ProductionLine()
+        public ProductionLine(ILineView lineView)
         {
+            _lineView = lineView;
             _lineThread = new Thread(StartLineThread);
             _markcodeService = new MarkcodeService(new MarkcodeRepository());
 
@@ -39,17 +42,16 @@ namespace LabProjectDemo.Infrastructure.ProductionLines
             try
             {
                 isWorking = true;
-                DeviceConnection();
+                StartDevices();
 
                 MarkcodeDTO pallet = new();
-
-
 
                 while (isWorking)
                 {
                     pallet = GetOnePallet();
                     _addToDbTask = Task.Run(() => { _markcodeService.AddMarkcode(pallet); });
                     await _addToDbTask;
+                    _lineView.UpdeteCounter();
                     /*                    string[] decodedCodes = _codeDecoder.Decode(_cameraNetworkModule.GetEncodedCode());
                                         if (_codeDecoder.isCodesCorrected(decodedCodes))
                                         {
@@ -66,19 +68,19 @@ namespace LabProjectDemo.Infrastructure.ProductionLines
             }
         }
 
-        private void DeviceConnection()
+        private void StartDevices()
         {
             foreach (var camera in productCameras)
             {
-                camera.Connect();
+                camera.StartWork();
             }
             foreach (var camera in boxCameras)
             {
-                camera.Connect();
+                camera.StartWork();
             }
             foreach (var camera in palletCameras)
             {
-                camera.Connect();
+                camera.StartWork();
             }
         }
 
@@ -92,15 +94,15 @@ namespace LabProjectDemo.Infrastructure.ProductionLines
             {
                 while (products.Count < _requiredAmountOfProducts)
                 {
-                    foreach (var product in productCameras[0].GetCode())
+                    foreach (var product in productCameras[0].GetCodes())
                     {
                         products.Add(new MarkcodeDTO { code = product, markcodeDTOs = null });
                     }
                 }
-                boxCode = boxCameras[0].GetCode()[0];
+                boxCode = boxCameras[0].GetCodes()[0];
                 boxes.Add(new MarkcodeDTO { code = boxCode, markcodeDTOs = products });
             }
-            palletCode = palletCameras[0].GetCode()[0];
+            palletCode = palletCameras[0].GetCodes()[0];
             return new MarkcodeDTO { code = palletCode, markcodeDTOs = boxes };
         }
 

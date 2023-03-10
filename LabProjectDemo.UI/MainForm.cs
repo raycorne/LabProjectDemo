@@ -1,23 +1,17 @@
-using LabProjectDemo.Core;
-using LabProjectDemo.Core.Interfaces.Cameras;
-using LabProjectDemo.Core.Services.Camera;
-using LabProjectDemo.Core.Services;
-using LabProjectDemo.Infrastructure.Interfaces;
-using LabProjectDemo.Infrastructure.NetworkConnector;
-using LabProjectDemo.Infrastructure.Repositories;
-using LabProjectDemo.Core.Entities;
 using LabProjectDemo.Core.Interfaces;
+using LabProjectDemo.Core.Interfaces.Cameras;
 using LabProjectDemo.Infrastructure.Controllers;
+using LabProjectDemo.Infrastructure.Interfaces.UIs;
 
 namespace LabProjectDemo.UI
 {
-    public partial class MainForm : Form, IMainView
+    public partial class MainForm : Form, IMainView, ILineView
     {
         ICameraController cameraController;
         private readonly IDeviceController _deviceController;
         public MainForm()
         {
-            LabProjectDemo.Infrastructure.Startup startup = new();
+            LabProjectDemo.Infrastructure.Startup startup = new(this);
             _deviceController = new DevicesController(
                 startup.GetConfiguretedProductionLines(), this);
 
@@ -40,20 +34,20 @@ namespace LabProjectDemo.UI
                 number++;
                 numOfReaded.Text = number.ToString();
             }));
-            
+
         }
 
         async private void workButton_Click(object sender, EventArgs e)
         {
             if (_deviceController.isWorking(0) != true)
             {
-                _deviceController.StartCamera(0);
+                _deviceController.StartLine(0);
                 workButton.Text = "Stop";
             }
             else
             {
                 workButton.Enabled = false;
-                await Task.Run(() => _deviceController.StopCamera(0));
+                await Task.Run(() => _deviceController.StopLine(0));
                 workButton.Enabled = true;
                 workButton.Text = "Start";
             }

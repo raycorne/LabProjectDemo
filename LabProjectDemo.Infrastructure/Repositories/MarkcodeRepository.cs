@@ -8,8 +8,6 @@ namespace LabProjectDemo.Infrastructure.Repositories
     public class MarkcodeRepository : IMarkcodeRepository
     {
         private AppDbContext _db;
-        /*private DbContext _context;
-        private DbSet<MarkcodeDbDTO> _dbSet;*/
 
         public void AddMarkcode(MarkcodeDTO markcode)
         {
@@ -22,7 +20,7 @@ namespace LabProjectDemo.Infrastructure.Repositories
                     Id = palletId,
                     Code = pallet.code
                 });
-                foreach(var boxes in pallet.markcodeDbDTOs)
+                foreach(var boxes in pallet.markcodeDTOs)
                 {
                     string boxId = Guid.NewGuid().ToString();
                     _db.BoxMarkcodes.Add(new Core.Entities.BoxMarkcode
@@ -31,7 +29,7 @@ namespace LabProjectDemo.Infrastructure.Repositories
                         Code = boxes.code,
                         PalletCodeId = boxId
                     });
-                    foreach(var products in boxes.markcodeDbDTOs)
+                    foreach(var products in boxes.markcodeDTOs)
                     {
                         _db.ProductMarkcodes.Add(new Core.Entities.ProductMarkcode
                         {
@@ -41,7 +39,6 @@ namespace LabProjectDemo.Infrastructure.Repositories
                         });
                     }
                 }
-                //_db.Markcode.Add(markcode);
                 _db.SaveChanges();
             }
         }
