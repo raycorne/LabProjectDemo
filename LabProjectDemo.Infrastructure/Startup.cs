@@ -9,13 +9,13 @@ namespace LabProjectDemo.Infrastructure
     public class Startup
     {
         public bool isConfiguratedSuccess { get; private set; }
-        public MainLinesCfgJsonDTO? LinesConfiguration { get; set; }
-        private List<ProductionLine> _productionLines = new();
+        public LineJsonDTO? LineConfiguration { get; set; }
+        private ProductionLine _productionLine;
         private ProductionLineConfigurationBuilder _lineConfigurationBuilder;
         public Startup(ILineView lineView)
         {
             GetLinesConfigurationFromJson();
-            _productionLines = new();
+            //_productionLines = new();
             ConfigurateLines(lineView);
         }
 
@@ -25,8 +25,8 @@ namespace LabProjectDemo.Infrastructure
                 .SetBasePath(Directory.GetCurrentDirectory())
                 .AddJsonFile("devicesConfig.json")
                 .Build();
-            LinesConfiguration = configuration.GetSection("LinesConfiguration").Get<MainLinesCfgJsonDTO>();
-            if (LinesConfiguration == null)
+            LineConfiguration = configuration.GetSection("Line").Get<LineJsonDTO>();
+            if (LineConfiguration == null)
             {
                 isConfiguratedSuccess = false;
                 return;
@@ -35,16 +35,13 @@ namespace LabProjectDemo.Infrastructure
 
         private void ConfigurateLines(ILineView lineView)
         {
-            foreach (var line in LinesConfiguration.Lines)
-            {
-                _lineConfigurationBuilder = new ProductionLineConfigurationBuilder(line, lineView);
-                _productionLines.Add(_lineConfigurationBuilder.GetBuildedProductionLine());
-            }
+            _lineConfigurationBuilder = new ProductionLineConfigurationBuilder(LineConfiguration, lineView);
+            _productionLine = _lineConfigurationBuilder.GetBuildedProductionLine();
         }
 
-        public List<ProductionLine> GetConfiguretedProductionLines()
+        public ProductionLine GetConfiguretedProductionLine()
         {
-            return _productionLines;
+            return _productionLine;
         }
 
     }

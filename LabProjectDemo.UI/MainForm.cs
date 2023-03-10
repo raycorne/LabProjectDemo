@@ -13,7 +13,7 @@ namespace LabProjectDemo.UI
         {
             LabProjectDemo.Infrastructure.Startup startup = new(this);
             _deviceController = new DevicesController(
-                startup.GetConfiguretedProductionLines(), this);
+                startup.GetConfiguretedProductionLine(), this);
 
             /*cameraController = new CameraController(
                 new CameraTCPConnector(), new CameraCodeDecoderService(),
@@ -39,15 +39,15 @@ namespace LabProjectDemo.UI
 
         async private void workButton_Click(object sender, EventArgs e)
         {
-            if (_deviceController.isWorking(0) != true)
+            if (_deviceController.isWorking() != true)
             {
-                _deviceController.StartLine(0);
+                _deviceController.StartLine();
                 workButton.Text = "Stop";
             }
             else
             {
                 workButton.Enabled = false;
-                await Task.Run(() => _deviceController.StopLine(0));
+                await Task.Run(() => _deviceController.StopLine());
                 workButton.Enabled = true;
                 workButton.Text = "Start";
             }

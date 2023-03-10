@@ -6,28 +6,28 @@ namespace LabProjectDemo.Infrastructure.Controllers
 {
     public class DevicesController : IDeviceController
     {
-        private List<ProductionLine> _lines;
+        private ProductionLine _line;
         private readonly IMainView _mainView;
 
-        public DevicesController(List<ProductionLine> lines, IMainView mainView)
+        public DevicesController(ProductionLine line, IMainView mainView)
         {
-            _lines = lines;
+            _line = line;
             _mainView = mainView;
         }
 
-        public void StartLine(int index)
+        public void StartLine()
         {
-            _lines[index].StartWork();
+            _line.StartWork();
         }
 
-        public void StopLine(int index)
+        public void StopLine()
         {
-            _lines[index].StopWork();
+            _line.StopWork();
         }
 
-        public bool isWorking(int index)
+        public bool isWorking()
         {
-            return _lines[index].isWorking;
+            return _line.isWorking;
         }
     }
 }

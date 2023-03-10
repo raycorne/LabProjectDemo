@@ -2,9 +2,9 @@
 {
     public interface IDeviceController
     {
-        public void StartLine(int index);
-        public void StopLine(int index);
+        public void StartLine();
+        public void StopLine();
 
-        public bool isWorking(int index);
+        public bool isWorking();
     }
 }
